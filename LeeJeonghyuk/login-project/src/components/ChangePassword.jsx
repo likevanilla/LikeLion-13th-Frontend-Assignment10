@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "../stores/authStore";
+import "./ChangePassword.css";
 
 export default function ChangePassword() {
   const error = useAuthStore((s) => s.error);
@@ -18,30 +19,30 @@ export default function ChangePassword() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="login-form">
+    <form onSubmit={onSubmit} className="password-form">
       <input
         placeholder="현재 비밀번호"
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
-        className="login-input"
+        className="password-input"
       />
 
       <input
         placeholder="새 비밀번호 (6자 이상, 숫자 포함)"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-        className="login-input"
+        className="password-input"
       />
 
       <input
         placeholder="새 비밀번호 확인"
         value={checkNewPassword}
         onChange={(e) => setCheckNewPassword(e.target.value)}
-        className="login-input"
+        className="password-input"
       />
 
-      {error && <p className="login-error">{error}</p>}
-      <button type="submit" className="login-button">
+      {error && <p className="password-error">{error}</p>}
+      <button type="submit" className="password-button">
         변경하기
       </button>
     </form>
