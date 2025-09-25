@@ -2,17 +2,22 @@ import { useState } from "react";
 import { useAuthStore } from "../stores/authStore";
 
 export default function ChangePassword() {
-  const [password, setPassword] = useState("");
-
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
-  const user = useAuthStore((s) => s.user);
-  const logout = useAuthStore((s) => s.logout);
+  // const user = useAuthStore((s) => s.user);
   const error = useAuthStore((s) => s.error);
+  const changingPassword = useAuthStore((s) => s.changingPassword);
 
-  if (!isLoggedIn) return null;
+  const [password, setPassword] = useState(changingPassword.password);
+
+  if (!isLoggedIn && !changingPassword) return null;
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await changingPassword(password);
+  };
 
   return (
-    <form className="login-form">
+    <form onSubmit={onSubmit} className="login-form">
       <h2 className="login-title">비밀번호 변경</h2>
 
       <input placeholder="현재 비밀번호" className="login-input" />

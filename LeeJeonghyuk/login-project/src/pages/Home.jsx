@@ -11,11 +11,12 @@ export default function Home() {
     <>
       <div className="home-page">
         {!changingPassword && <h1 className="home-title">홈</h1>}
+        {changingPassword && <h1 className="home-title">비밀번호 변경</h1>}
         <LoginStatus />
         {!isLoggedIn && <LoginForm />}
         {isLoggedIn && <p className="home-text">로그인 완료!</p>}
         {isLoggedIn && (
-          <button onClick={changePassword} className="change-password">
+          <button onClick={changingPassword} className="change-password">
             비밀번호 변경
           </button>
         )}
