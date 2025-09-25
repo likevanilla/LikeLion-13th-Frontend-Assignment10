@@ -5,9 +5,8 @@ export default function LoginStatus() {
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
-  const changingPassword = useAuthStore((s) => s.changingPassword);
 
-  if (!isLoggedIn && !changingPassword) return null;
+  if (!isLoggedIn) return null;
 
   return (
     <div className="status-wrap">

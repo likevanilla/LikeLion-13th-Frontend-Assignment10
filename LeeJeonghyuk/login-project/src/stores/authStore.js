@@ -29,7 +29,13 @@ export const useAuthStore = create((set) => ({
     return true;
   },
 
-  logout: () => set({ isLoggedIn: false, user: null, error: null }),
+  logout: () =>
+    set({
+      isLoggedIn: false,
+      user: null,
+      error: null,
+      changingPassword: false,
+    }),
 
   changePassword: async (username, password) => {
     set({

@@ -15,11 +15,6 @@ export default function Home() {
         <LoginStatus />
         {!isLoggedIn && <LoginForm />}
         {isLoggedIn && <p className="home-text">로그인 완료!</p>}
-        {isLoggedIn && (
-          <button onClick={changingPassword} className="change-password">
-            비밀번호 변경
-          </button>
-        )}
       </div>
     </>
   );
