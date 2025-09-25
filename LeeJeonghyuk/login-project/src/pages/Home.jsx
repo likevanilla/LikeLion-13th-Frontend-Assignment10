@@ -7,7 +7,12 @@ import "./Home.css";
 export default function Home() {
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const changingPassword = useAuthStore((s) => s.changingPassword);
-  const changePassword = useAuthStore((s) => s.changePassword);
+  const setChangingPassword = useAuthStore((s) => s.setChangingPassword);
+
+  const onClick = (e) => {
+    e.preventDefault();
+    setChangingPassword();
+  };
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function Home() {
           <p className="home-text">로그인 완료!</p>
         )}
         {isLoggedIn && !changingPassword && (
-          <button onClick={changePassword} className="change-password">
+          <button onClick={onClick} className="change-password">
             비밀번호 변경
           </button>
         )}
