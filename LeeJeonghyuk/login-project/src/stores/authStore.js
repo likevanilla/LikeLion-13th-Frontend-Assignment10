@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set, get) => ({
   isLoggedIn: false,
   user: null,
+  password: null,
   error: null,
   changingPassword: false,
 
@@ -28,7 +29,7 @@ export const useAuthStore = create((set) => ({
     set({
       isLoggedIn: true,
       user: { username },
-      password: { password },
+      password,
       error: null,
     });
     return true;
@@ -42,15 +43,16 @@ export const useAuthStore = create((set) => ({
       changingPassword: false,
     }),
 
-  changePassword: async (password, newPassword) => {
-    set({
-      isLoggedIn: true,
-      error: null,
-      changingPassword: true,
-    });
-    // 마지막에 isLoggedIn이랑 changePassword set안 해도 되는지 확인해보기
+  changePassword: async (currentPassword, newPassword, checkNewPassword) => {
+    const prevPassword = get().password;
+    set({ error: null });
 
-    await await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 500));
+
+    if (prevPassword != currentPassword) {
+      set({ error: "현재 비밀번호가 일치하지 않습니다." });
+      return false;
+    }
 
     if (newPassword.length < 6) {
       set({ error: "비밀번호는 최소 6자 이상이어야 합니다." });
@@ -62,7 +64,17 @@ export const useAuthStore = create((set) => ({
       return false;
     }
 
-    set({ isLoggedIn: true, password: { newPassword }, error: null });
+    if (currentPassword == newPassword) {
+      set({ error: "새 비밀번호는 현재 비밀번호와 다르게 변경해야 합니다." });
+      return false;
+    }
+
+    if (newPassword != checkNewPassword) {
+      set({ error: "새 비밀번호가 서로 다릅니다." });
+      return false;
+    }
+
+    set({ password: newPassword, error: null, changingPassword: false });
     return true;
   },
 

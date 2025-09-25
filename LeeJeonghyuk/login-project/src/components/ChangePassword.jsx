@@ -4,38 +4,39 @@ import { useAuthStore } from "../stores/authStore";
 export default function ChangePassword() {
   const error = useAuthStore((s) => s.error);
   const changingPassword = useAuthStore((s) => s.changingPassword);
-  const changePassword = useAuthStore((s) => s.ChangePassword);
+  const changePassword = useAuthStore((s) => s.changePassword);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [checkNewPassword, setCheckNewPassword] = useState("");
 
   if (!changingPassword) return null;
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await changePassword(currentPassword, newPassword);
+    await changePassword(currentPassword, newPassword, checkNewPassword);
   };
 
   return (
     <form onSubmit={onSubmit} className="login-form">
       <input
         placeholder="현재 비밀번호"
-        value={""}
+        value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
         className="login-input"
       />
 
       <input
         placeholder="새 비밀번호 (6자 이상, 숫자 포함)"
-        value={""}
+        value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
         className="login-input"
       />
 
       <input
         placeholder="새 비밀번호 확인"
-        value={""}
-        onChange={(e) => setNewPassword(e.target.value)}
+        value={checkNewPassword}
+        onChange={(e) => setCheckNewPassword(e.target.value)}
         className="login-input"
       />
 
