@@ -30,6 +30,7 @@ export default function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="login-input"
+        type="password"
       />
 
       {error && <p className="login-error">{error}</p>}

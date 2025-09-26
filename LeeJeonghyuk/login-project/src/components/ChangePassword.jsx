@@ -25,6 +25,7 @@ export default function ChangePassword() {
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
         className="password-input"
+        type="password"
       />
 
       <input
@@ -32,6 +33,7 @@ export default function ChangePassword() {
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
         className="password-input"
+        type="password"
       />
 
       <input
@@ -39,6 +41,7 @@ export default function ChangePassword() {
         value={checkNewPassword}
         onChange={(e) => setCheckNewPassword(e.target.value)}
         className="password-input"
+        type="password"
       />
 
       {error && <p className="password-error">{error}</p>}

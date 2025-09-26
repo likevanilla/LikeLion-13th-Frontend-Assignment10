@@ -75,6 +75,7 @@ export const useAuthStore = create((set, get) => ({
     }
 
     set({ password: newPassword, error: null, changingPassword: false });
+    alert("비밀번호가 변경되었습니다.");
     return true;
   },
 
